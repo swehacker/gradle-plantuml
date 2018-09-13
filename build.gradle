@@ -1,0 +1,28 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'swehacker.gradle.plugin.plantuml'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'swehacker.gradle.plugin.plantuml'
+            implementationClass = 'swehacker.gradle.plugin.plantuml.PlantUmlPlugin'
+        }
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+hello {
+    message = "Hi"
+    recipient = "Gradle"
+}
