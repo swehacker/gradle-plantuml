@@ -1,17 +1,17 @@
 plugins {
     id 'java-gradle-plugin'
-    id 'plantuml'
 }
 
 sourceCompatibility = 1.8
 
 repositories {
     jcenter()
+    mavenLocal()
 }
 
 gradlePlugin {
     plugins {
-        simplePlugin {
+        plantUml {
             id = 'swehacker.gradle.plugin.plantuml'
             implementationClass = 'swehacker.gradle.plugin.plantuml.PlantUmlPlugin'
         }
@@ -26,7 +26,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
 }
 
-domain {
-    message = "Hi"
-    recipient = "Gradle"
-}
+/**domain {
+    docsDir = "/build/domain.puml"
+    packageStructure = "swehacker"
+}*/
