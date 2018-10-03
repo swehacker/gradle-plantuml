@@ -1,8 +1,12 @@
 plugins {
     id 'java-gradle-plugin'
+    id 'maven-publish'
 }
 
 sourceCompatibility = 1.8
+
+group = 'swehacker.gradle.plugin.plantuml'
+version = '1.0-SNAPSHOT'
 
 repositories {
     jcenter()
@@ -21,9 +25,27 @@ gradlePlugin {
 dependencies {
     compile 'org.reflections:reflections:0.9.11'
 
+    compile gradleApi()
+    compile localGroovy()
+    
     testCompile 'org.assertj:assertj-core:3.11.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.2.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
+}
+
+publishing {
+    publications {
+        myLibrary(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'myRepo'
+            url = "file://${buildDir}/repo"
+        }
+    }
 }
 
 /**domain {
