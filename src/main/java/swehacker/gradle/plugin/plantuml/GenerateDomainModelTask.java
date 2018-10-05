@@ -1,24 +1,9 @@
 package swehacker.gradle.plugin.plantuml;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.artifacts.Configuration;
-import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.InputFiles;
-import org.gradle.api.tasks.Internal;
+import org.gradle.api.tasks.*;
 import org.gradle.api.tasks.Optional;
-import org.gradle.api.tasks.TaskAction;
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.scanners.SubTypesScanner;
@@ -27,15 +12,14 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import swehacker.gradle.plugin.plantuml.render.PlantRenderer;
-import swehacker.gradle.plugin.plantuml.structure.Aggregation;
-import swehacker.gradle.plugin.plantuml.structure.Extension;
-import swehacker.gradle.plugin.plantuml.structure.Implementation;
-import swehacker.gradle.plugin.plantuml.structure.Relation;
-import swehacker.gradle.plugin.plantuml.structure.Use;
+import swehacker.gradle.plugin.plantuml.structure.*;
 import swehacker.gradle.plugin.plantuml.util.CanonicalName;
 import swehacker.gradle.plugin.plantuml.util.ClassHelper;
 
-public class GenerateDomainModelTask extends DefaultTask {
+import java.lang.reflect.*;
+import java.util.*;
+
+class GenerateDomainModelTask extends DefaultTask {
 
   @Optional
   @Input
@@ -52,18 +36,14 @@ public class GenerateDomainModelTask extends DefaultTask {
   private ClassLoader classLoader;
 
   @InputFiles
-  Configuration classpath;
+  private Configuration classpath;
 
   void setDocumentationDir(String docsDir) {
     this.docsDir = docsDir;
   }
 
-  public void setOutputFile(String outputFile) {
+  void setOutputFile(String outputFile) {
     this.outputFile = outputFile;
-  }
-
-  public void setPackageStructure(String packageStructure) {
-    this.packageStructure = packageStructure;
   }
 
   void setClassLoader(ClassLoader classLoader) {

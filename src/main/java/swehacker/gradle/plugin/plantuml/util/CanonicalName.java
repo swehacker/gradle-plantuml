@@ -22,7 +22,7 @@ public enum CanonicalName {
         this.code = code;
     }
 
-    public static CanonicalName forCode(String code) {
+    public static CanonicalName fromCode(String code) {
         for (CanonicalName c : CanonicalName.values()) {
             if (code.startsWith(c.code)) {
                 return c;
@@ -34,7 +34,7 @@ public enum CanonicalName {
     public static String getClassName(String code) {
         CanonicalName cn;
         try {
-            cn = forCode(code);
+            cn = fromCode(code);
         } catch (IllegalArgumentException e) {
             return code;
         }

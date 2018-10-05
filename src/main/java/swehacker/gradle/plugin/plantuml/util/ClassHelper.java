@@ -6,13 +6,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ClassHelper {
+    private static final Logger logger = Logger.getLogger("Main");
+    private static final String REGEX_FOR_PACKAGE = "((([ice])(nterface|lass|num))? ?([\\w\\[][_\\w\\d]+\\.)+)";
 
     private ClassHelper() {
         // Util/Helper class
     }
-
-    private static final Logger logger = Logger.getLogger("Main");
-    private static final String REGEX_FOR_PACKAGE = "((([ice])(nterface|lass|num))? ?([\\w\\[][_\\w\\d]+\\.)+)";
 
     public static String getSimpleName(String fqcn) {
         return fqcn.replaceAll(REGEX_FOR_PACKAGE, "$3 ");

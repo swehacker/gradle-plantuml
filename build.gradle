@@ -13,15 +13,6 @@ repositories {
     mavenLocal()
 }
 
-gradlePlugin {
-    plugins {
-        plantUml {
-            id = 'swehacker.gradle.plugin.plantuml'
-            implementationClass = 'swehacker.gradle.plugin.plantuml.PlantUmlPlugin'
-        }
-    }
-}
-
 dependencies {
     compile 'org.reflections:reflections:0.9.11'
 
@@ -47,8 +38,3 @@ publishing {
         }
     }
 }
-
-/**domain {
-    docsDir = "/build/domain.puml"
-    packageStructure = "swehacker"
-}*/

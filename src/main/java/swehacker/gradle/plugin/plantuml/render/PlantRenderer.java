@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 import swehacker.gradle.plugin.plantuml.structure.Relation;
 import swehacker.gradle.plugin.plantuml.structure.Use;
 import swehacker.gradle.plugin.plantuml.util.ClassHelper;
-import swehacker.gradle.plugin.plantuml.util.Strings;
 
 public class PlantRenderer {
 
@@ -122,12 +121,12 @@ public class PlantRenderer {
     for (TypeVariable t : aClass.getTypeParameters()) {
       Type[] bounds = t.getBounds();
       String jointBounds = ClassHelper.getSimpleName(
-          Strings.join(Arrays.stream(bounds).map(bound -> bound.getTypeName()).collect(Collectors.toList()), "&"));
+          String.join("&", Arrays.stream(bounds).map(bound -> bound.getTypeName()).collect(Collectors.toList())));
       typeParams.add(t.getName() + " extends " + jointBounds);
     }
 
     if (typeParams.isEmpty()) {
-      sb.append(" <").append(Strings.join(typeParams, ", ")).append(">");
+      sb.append(" <").append(String.join(", ", typeParams)).append(">");
     }
   }
 
