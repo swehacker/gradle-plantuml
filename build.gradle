@@ -3,10 +3,10 @@ plugins {
     id 'maven-publish'
 }
 
-sourceCompatibility = 1.8
+sourceCompatibility = 10
 
 group = 'swehacker.gradle.plugin.plantuml'
-version = '1.0-SNAPSHOT'
+version = '0.1.0'
 
 repositories {
     jcenter()
