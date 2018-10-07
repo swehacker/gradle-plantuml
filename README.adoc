@@ -1,2 +1,9 @@
 = Gradle PlantUML Generator
 
+== Test
+
+=== Test
+.Publish the plugin to a local maven repository.
+----
+gradle publishToMavenLocal
+----

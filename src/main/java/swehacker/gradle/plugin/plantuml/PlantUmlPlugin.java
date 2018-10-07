@@ -20,7 +20,7 @@ public class PlantUmlPlugin implements Plugin<Project> {
       //task.classpath = ccp;
       task.setClassLoader(project.getClass().getClassLoader());
 
-      project.getConfigurations().findByName("runtime").getFiles().forEach(file -> System.out.println(file.getAbsolutePath()));
+      //project.getConfigurations().findByName("runtime").getFiles().forEach(file -> System.out.println(file.getAbsolutePath()));
     });
   }
 }
