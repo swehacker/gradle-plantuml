@@ -3,7 +3,39 @@
 The plugin will generate uml using PlantUML and can then be used to create images or be embedded in documents like
 generated from asciidoctor.
 
+== Configure the plugin
+
+=== Domain Model Configuration
+The plugin is easy to setup
+
+[width=100%, cols="1,4", options="header"]
+|=====
+| Parameter        | Description
+| classpath        | Is currently only needed because of a problem with getting the configuration from the java plugin.
+| outputFile       | Where to store the generated file, from the project root.
+| packageStructure | Where in your code you want to start rendering the UML.
+|=====
+
+.Example Configuration
+----
+generateDomainModel {
+  classpath = project.configurations.runtime.files
+  outputFile = '<Where you want your model to be stored>'
+  packageStructure = '<com.your.domain.model>'
+}
+----
+
+== Future
+* Configure relations.
+* Ignore specific classes.
+* Ignore packages.
+* Specify several packages.
+* Specify classes to be used in the model.
+
+== Releases
 .Version 0.1.0
 * Supports java versions from 10.
 * Currently only generates domain models
 
+.Version 0.1.1
+* Changed the id from plantuml to swehacker.plantuml everywhere
