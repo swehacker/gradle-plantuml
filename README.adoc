@@ -1,9 +1,9 @@
-= Gradle PlantUML Generator
+= Gradle Plugin: PlantUML Generator
 
-== Test
+The plugin will generate uml using PlantUML and can then be used to create images or be embedded in documents like
+generated from asciidoctor.
 
-=== Test
-.Publish the plugin to a local maven repository.
-----
-gradle publishToMavenLocal
-----
+.Version 0.1.0
+* Supports java versions from 10.
+* Currently only generates domain models
+

@@ -1,5 +1,6 @@
 plugins {
     id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.10.0'
     id 'maven-publish'
 }
 
@@ -15,22 +16,36 @@ repositories {
 
 dependencies {
     compile 'org.reflections:reflections:0.9.11'
-
-    compile gradleApi()
-    compile localGroovy()
-
-    testCompile gradleTestKit()
     testCompile 'org.assertj:assertj-core:3.11.0'
     testCompile 'junit:junit:4.12'
 }
 
+pluginBundle {
+    website = 'https://www.swehacker.com'
+    vcsUrl = 'https://github.com/swehacker/gradle-plantuml'
+    description = 'Generates UML diagrams that can be used with documentation tools like asciidoctor.'
+    tags = ['plantuml', 'domain model', 'uml', 'diagram']
+
+    plugins {
+        plantumlPlugin {
+            displayName = 'PlantUML Generator'
+        }
+    }
+}
+
 gradlePlugin {
     plugins {
-        plantuml {
-            id = 'plantuml'
+        plantumlPlugin {
+            id = 'swehacker.plantuml'
             implementationClass = 'swehacker.gradle.plugin.plantuml.PlantUmlPlugin'
         }
     }
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
 }
 
 // Write the plugin's classpath to a file to share with the tests
@@ -45,6 +60,8 @@ task createClasspathManifest {
         file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
     }
 }
+
+
 
 publishing {
     publications {

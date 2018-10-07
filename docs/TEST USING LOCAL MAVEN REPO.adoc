@@ -1,0 +1,38 @@
+= Test plugin
+Test using the local maven repository to share the plugin between projects.
+
+== Test with another Gradle project
+We need to add the maven local repository so the project will find the plugin.
+Add the following to the build.gradle file.
+----
+repositories {
+  mavenLocal()
+}
+----
+
+To use the plugin we just need to do an apply plugin statement in the build.gradle file.
+----
+apply plugin 'swehacker.plantuml'
+----
+
+.Configuration
+----
+generateDomainModel {
+  classpath = project.configurations.runtime.files
+  outputFile = 'build/domain_model.puml'
+  packageStructure = '<com.your.domain.model>'
+}
+----
+
+== Build, Publish and Test
+.Publish the plugin to a local maven repository.
+----
+gradle publishToMavenLocal
+----
+
+Now we can run the task in the project we use for testing the plugin.
+
+.Run the task
+----
+gradle generateDomainModel
+----
